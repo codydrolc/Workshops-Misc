@@ -1,5 +1,5 @@
 ********************************************************************************
-*			          Analyzing Survey Data Using Stata                        *
+*		      Analyzing Survey Data Using Stata                        *
 ************* Created: 23 January 2017                                         *
 ************* Edited: 14 February 2017                                         *
 *                                                                              *
@@ -28,19 +28,19 @@ use anes2012, clear
 /*
 Post-stratification weight						weight_full
 Primary sampling unit (PSU)						psu_full
-Stratification									strata_full
+Stratification								strata_full
 Party Identification							pid_x
 2008 Presidential Vote							interest_whovote2008
 2012 Presidential Vote							presvote2012_x
-Male											male
-Obama Feeling Therm								ft_dpc
+Male									male
+Obama Feeling Therm							ft_dpc
 Romney Feeling Therm							ft_rpc
 Hillary Feeling Therm							ft_hclinton
-Family Income									income
-Minority status									minority
+Family Income								income
+Minority status								minority
 Southern sample region							south
-Marital status									married
-Handling of economy								economy
+Marital status								married
+Handling of economy							economy
 
 Note: some variable names were changed for ease of use
 */
