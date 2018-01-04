@@ -9,8 +9,8 @@
 # 2) Save the .zip file in your desired location
 # 3) Extract the "Location History.json" file
 # The location data are not completely accurate; you may notice random points 
-# in the ocean or other places you have never been. Subset your data to remove
-# erroneous points. 
+# in the ocean or other places you have never been. Subset your data  based on
+# the "accuracy" variable to remove erroneous points. 
 
 # Set directory with "Location History.json" file
 setwd("C:/generic/directory/please/set")
@@ -23,6 +23,7 @@ install.packages(c("jsonline", "lubridate", "ggplot2", "ggmap", "maps"),
 library(jsonlite); library(lubridate); library(ggplot2)
 library(ggmap); library(maps)
 
+##### Prepare data
 # Read raw JSON data
 raw <- fromJSON("Location History.json") # this may take several minutes
 
@@ -41,6 +42,13 @@ lc$year <- year(lc$time)
 lc$lat <- lc$latitudeE7/1e7
 lc$lon <- lc$longitudeE7/1e7
 
+# Remove inaccurate points
+# I am going to define these as points where this accuracy is greater than
+# 500 meters. You can adjust the threshold has desired. 
+ggplot() + geom_histogram(data = lc, aes(accuracy)) # view basic distribution
+lcsub <- subset(lc, accuracy <= 500)
+
+##### Map points
 # There are other things that can be done with these data, but I'm just going
 # to move into how to actually map your location. The following example is for
 # the United States but anywhere in the world works--just change the location.
@@ -48,19 +56,19 @@ lc$lon <- lc$longitudeE7/1e7
 # Basic United States map
 usmap <- map_data("state")
 
-# Save points to object
+# Map points to ggplot2 object
 usmap <- ggplot() + 
   geom_polygon(data = usmap, aes(x = long, y = lat, group = group),
   color = "white", fill = "grey10" )
 usmap # view map
 
 # Add points
-usmap + geom_point(data = lc, aes(lon, lat), alpha = 0.5, color = "gold3") +
+usmap + geom_point(data = lcsub, aes(lon, lat), alpha = 0.5, color = "gold3") +
   labs(x = "", y = "") + theme(axis.text = element_blank(), 
   axis.ticks = element_blank()) # removing unnecessary labels
 
 # Or, color by year (much more interesting)
-usmap + geom_point(data = lc, aes(lon, lat, color = as.factor(year)), alpha = 0.5) +
+usmap + geom_point(data = lcsub, aes(lon, lat, color = as.factor(year)), alpha = 0.5) +
   labs(x = "", y = "", color = "Year") + theme(axis.text = element_blank(), 
   axis.ticks = element_blank())
 
@@ -70,6 +78,6 @@ gusmap <- get_map(location = "united states", zoom = 4, maptype = "terrain",
 ggmap(gusmap) # view map, adjust zoom as desired (zoom ranges from 3 to 21)
 
 # Plot GPS coordinates (be patient: a lot of data needs to be plotted)
-ggmap(gusmap) + geom_point(data = lc, aes(lon, lat, color = as.factor(year)), alpha = 0.5) +
+ggmap(gusmap) + geom_point(data = lcsub, aes(lon, lat, color = as.factor(year)), alpha = 0.5) +
   labs(x = "", y = "", color = "Year") + theme(axis.text = element_blank(), 
   axis.ticks = element_blank())
