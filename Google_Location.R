@@ -44,9 +44,9 @@ lc$lon <- lc$longitudeE7/1e7
 
 # Remove inaccurate points
 # I am going to define these as points where this accuracy is greater than
-# 500 meters. You can adjust the threshold has desired. 
+# 1000 meters. You can adjust the threshold has desired. 
 ggplot() + geom_histogram(data = lc, aes(accuracy)) # view basic distribution
-lcsub <- subset(lc, accuracy <= 500)
+lcsub <- subset(lc, accuracy <= 1000)
 
 ##### Map points
 # There are other things that can be done with these data, but I'm just going
