@@ -26,7 +26,7 @@ disc <- scale(disc)
 
 # Perform the singluar value decomposition
 # Keep first two left and right singular vectors
-svd.disc <- svd(disc, nu=2, nv=2)
+svd.disc <- svd(disc, nu = 2, nv = 2)
 
 # Save the first two singular values 
 svals <- svd.disc$d[1:2]
