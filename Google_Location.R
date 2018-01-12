@@ -59,7 +59,7 @@ usmap <- map_data("state")
 # Map points to ggplot2 object
 usmap <- ggplot() + 
   geom_polygon(data = usmap, aes(x = long, y = lat, group = group),
-  color = "white", fill = "grey10" )
+  color = "white")
 usmap # view map
 
 # Add points
