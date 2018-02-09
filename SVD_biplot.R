@@ -1,9 +1,9 @@
-################################################################################
-##### Singular value decomposition and biplot
+#-------------------------------------------------------------------------------
+#---- Singular value decomposition and biplot
 
 # This example uses the discretionary budget of the federal government in the
 # United States. Certain categories of the budget have been collapsed into 
-# "Other Agencies" for simplicity. The data are hosted in a tab-delimited  text
+# "Other Agencies" for simplicity. The data are hosted in a tab-delimited text
 # file on my github. Entries in each cell are the percent of the discretionary
 # budget going to each agency/area separted by columns.
 
@@ -53,14 +53,12 @@ ggplot() +
   geom_segment(vars.df, mapping = aes(x = originx, y = originx, xend = V1, yend = V2)) +
   theme_bw()
   
-# Biplot with labels for years and segments
+# Biplot with years as points and labels for segments
 ggplot(obs.df, aes(V1, V2)) + 
-  geom_point(shape = 21, color = "black", fill = "white", size = 2, stroke = 1) +
+  geom_text(label = rownames(obs.df), position = position_jitter(w = .3, h = .3)) +
   geom_segment(vars.df, mapping = aes(x = originx, y = originx, xend = V1, yend = V2)) +
   geom_text_repel(data = vars.df, aes(V1, V2, label = rownames(vars)), 
-    segment.color="blue", box.padding = unit(0.5, "lines"), force = 5) +
-  geom_text_repel(data = obs.df, aes(V1, V2, label = rownames(obs.df)), 
-    size = 4, box.padding = unit(0.5, "lines"), point.padding = unit(0.5, "lines"), force = 2) +
+    segment.color="blue", box.padding = unit(0.5, "lines"), force = 2) +
   scale_x_continuous(limits = c(-1.75, 1.75), breaks = seq(-1.5,1.5,.5), sec.axis = dup_axis()) + 
   scale_y_continuous(limits = c(-1.75, 1.75), breaks = seq(-1.5,1.5,.5), sec.axis = dup_axis()) +
   ylab("") + xlab("") + theme_bw()
