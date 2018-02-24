@@ -51,17 +51,17 @@ vars.df$originy <- rep(0, 21)
 # Basic biplot
 ggplot() + 
   geom_segment(vars.df, mapping = aes(x = originx, y = originx, xend = V1, yend = V2)) +
-  theme_bw()
+  theme_bw() + theme(panel.grid.minor = element_blank())
   
 # Biplot with years as points and labels for segments
 ggplot(obs.df, aes(V1, V2)) + 
   geom_text(label = rownames(obs.df), position = position_jitter(w = .3, h = .3)) +
   geom_segment(vars.df, mapping = aes(x = originx, y = originx, xend = V1, yend = V2)) +
-  geom_text_repel(data = vars.df, aes(V1, V2, label = rownames(vars)), 
-    segment.color="blue", box.padding = unit(0.5, "lines"), force = 2) +
+  geom_text_repel(data = vars.df, aes(V1, V2, label = rownames(vars)), seed = 1,
+    segment.color="blue", box.padding = unit(0.75, "lines"), force = 2) +
   scale_x_continuous(limits = c(-1.75, 1.75), breaks = seq(-1.5,1.5,.5), sec.axis = dup_axis()) + 
   scale_y_continuous(limits = c(-1.75, 1.75), breaks = seq(-1.5,1.5,.5), sec.axis = dup_axis()) +
-  ylab("") + xlab("") + theme_bw()
+  ylab("") + xlab("") + theme_bw() + theme(panel.grid.minor = element_blank())
 
 # Variance explained by first two pairs of singular vectors
 var.explained <- sum(svals^2)/sum(svd.disc$d^2)
