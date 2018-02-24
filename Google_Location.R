@@ -23,7 +23,7 @@ install.packages(c("jsonline", "lubridate", "ggplot2", "ggmap", "maps"),
 library(jsonlite); library(lubridate); library(ggplot2)
 library(ggmap); library(maps)
 
-##### Prepare data
+#---- Prepare data
 # Read raw JSON data
 raw <- fromJSON("Location History.json") # this may take several minutes
 
@@ -48,7 +48,7 @@ lc$lon <- lc$longitudeE7/1e7
 ggplot() + geom_histogram(data = lc, aes(accuracy)) # view basic distribution
 lcsub <- subset(lc, accuracy <= 1000)
 
-##### Map points
+#---- Map points
 # There are other things that can be done with these data, but I'm just going
 # to move into how to actually map your location. The following example is for
 # the United States but anywhere in the world works--just change the location.
