@@ -14,7 +14,7 @@ install.packages(c("ggplot2", "ggrepel"))
 library(ggplot2); library(ggrepel) 
 
 # Read data
-url <- "https://raw.githubusercontent.com/codydrolc/Workshops-Misc/master/discretionary_budget.txt"
+url <- "https://raw.githubusercontent.com/codydrolc/Workshops-Misc/master/Measurement_Theory/discretionary_budget.txt"
 discretionary <- read.table(url, header = TRUE, sep = "\t", check.names = FALSE)
 
 # Drop the first column for now
