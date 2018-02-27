@@ -1,4 +1,4 @@
-################################################################################
+#-------------------------------------------------------------------------------
 #---- Graph Google Location History
 
 # Note: This example only works if your phone has location tracking turned on
