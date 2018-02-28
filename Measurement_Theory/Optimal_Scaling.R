@@ -36,7 +36,7 @@ summary(basic) # Pretty much what you would expect
 
 #---- Set up alternating least squares optimal scaling (ALSOS) procedure
 # Set starting values equal to the vectors in original data
-# Under the ALSOS procedure, all variables are assumed to be ordinal
+# Under the ALSOS procedure, all variables are assumed to be ordinal.
 relative.os <- anes$relative
 partyid.os <- anes$partyid
 ideo.os <- anes$ideo
@@ -44,6 +44,7 @@ econ.os <- anes$econ
 bill.os <- anes$bill
 
 # Starting values for R-squared, loop number, and difference in R-squared values
+# The loop will overwrite these objects at each iteration. 
 pr.r2 <- 0
 iter <- 0
 r2.diff <- 1
@@ -56,6 +57,7 @@ record <- c() # matrix to record iterations
 while (r2.diff > 0.00001 && iter <= 50) {
   # Housekeeping
   iter <- iter + 1 # Add 1 to iteration
+  
   # Regression with optimally-scaled variables
   reg.os <- lm(relative.os ~ partyid.os + ideo.os + econ.os + bill.os)
   
@@ -67,7 +69,7 @@ while (r2.diff > 0.00001 && iter <= 50) {
   # If the R-squared values improved, move to the next iteration. If not, stop.
   if (r2.diff > 0.00001) {
     # Create predicted values of the dependent variable ("relative") and 
-    # perform the optimal scaling routine on the predicted values.
+    # perform the optimal scaling routine on the predicted values. Why?
     dvar.pred <- predict(reg.os) # Predicted values
     opscaled.dvar <- opscale(anes$relative, dvar.pred, level = 2, process = 1)
     relative.os <- opscaled.dvar$os # Extract and save optimally-scaled values
@@ -100,7 +102,7 @@ while (r2.diff > 0.00001 && iter <= 50) {
     opscaled.bill <- opscale(anes$bill, bill.pred, level = 2, process = 1)
     bill.os <- opscaled.bill$os
   }
-}
+} # Close loop
 
 #----- Finishing up
 # Examine iterations
@@ -135,7 +137,7 @@ colnames(os.orig) <- c("relative_os", "relative", "partyid_os", "partyid",
 plot.os <- function(obj) {
   df <- as.data.frame(cbind(obj$qual, obj$os)) # extract elements to data frame
   ggplot(df, aes(x = V1, y = V2)) + geom_point() + geom_line() + 
-  coord_fixed() + theme_bw() +
+  coord_fixed() + theme_bw() + # force square
   theme(panel.grid.minor = element_blank()) +
   scale_y_continuous(sec.axis = dup_axis(name = element_blank())) +
   scale_x_continuous(sec.axis = dup_axis(name = element_blank())) +
@@ -148,3 +150,26 @@ plot.os(opscaled.partyid)
 plot.os(opscaled.ideo)
 plot.os(opscaled.econ)
 plot.os(opscaled.bill)
+
+#-------------------------------------------------------------------------------
+#---- Unrelated but potentially helpful: Parallel processing
+# Make your code run faster by creating clusters 
+
+# Install
+install.packages("doParallel", dependencies = T)
+
+# Load package
+library(doParallel)
+
+# Find the number of cores
+cores <- detectCores() - 1 # Subtract 1 so you don't overload your computer
+cl <- makeCluster(cores) # Create cluster with the number of cores minus 1
+registerDoParallel(cl) # Register parallel backend
+
+# Close cluster
+stopImplicitCluster()
+
+# A quick warning: Parallel processing is not supported by every function in R.
+# It can also overload your computer. Make sure you either drop the number of 
+# cores to an appropriate level or close other background processes. 
+# Proceed with caution! 
