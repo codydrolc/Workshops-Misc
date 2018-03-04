@@ -8,7 +8,7 @@
 # budget going to each agency/area in a given year separted by columns.
 
 # Install packages
-install.packages(c("ggplot2", "ggrepel"))
+install.packages(c("ggplot2", "ggrepel", "reshape2"))
 
 # Load packages
 library(ggplot2); library(ggrepel) 
@@ -16,6 +16,14 @@ library(ggplot2); library(ggrepel)
 # Read data
 url <- "https://raw.githubusercontent.com/codydrolc/Workshops-Misc/master/Measurement_Theory/discretionary_budget.txt"
 discretionary <- read.table(url, header = TRUE, sep = "\t", check.names = FALSE)
+
+# A quick look at the data
+# Reshape data from wide to long and group by year
+disc.long <- reshape2::melt(discretionary, id.vars = "year")
+
+# Bar graph of each category over time
+ggplot(disc.long, aes(year, value)) + facet_wrap(~variable, ncol = 7) + 
+  geom_bar(stat = "identity") + theme_bw() + theme(panel.grid.minor = element_blank())
 
 # Drop the first column for now
 disc <- discretionary[, 2:22]
