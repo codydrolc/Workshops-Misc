@@ -17,7 +17,7 @@
 #     ideo -- 7-point self ideological placement. 
 #       1 for "extremely liberal", 7 for "extremely conservative"
 #     econ -- Judgement of the economy in the past year. 
-#       1 for "much better", 5 for "much better"
+#       1 for "much better", 5 for "much worse"
 #     bill -- Feeling thermometer rating of Bill Clinton. (0, 100)
 
 # Install packages
