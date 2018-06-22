@@ -65,7 +65,8 @@ vars.df$originy <- rep(0, 21)
 # Basic biplot
 ggplot() + 
   geom_segment(vars.df, mapping = aes(x = originx, y = originx, xend = V1, yend = V2)) +
-  theme_bw() + theme(panel.grid.minor = element_blank())
+  theme_bw() + 
+  theme(panel.grid.minor = element_blank())
 
 # Biplot with years as points and labels for segments
 ggplot(obs.df, aes(V1, V2)) + 
@@ -78,7 +79,9 @@ ggplot(obs.df, aes(V1, V2)) +
           sec.axis = dup_axis()) + 
   scale_y_continuous(limits = c(-1.75, 1.75), breaks = seq(-1.5,1.5,.5), 
           sec.axis = dup_axis()) +
-  ylab("") + xlab("") + theme_bw() + theme(panel.grid.minor = element_blank())
+  labs(y = "", x = "") + 
+  theme_bw() + 
+  theme(panel.grid.minor = element_blank())
 
 # Variance explained by first two pairs of singular vectors
 var.explained <- sum(svals^2)/sum(svd.disc$d^2)
