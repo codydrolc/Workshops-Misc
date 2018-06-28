@@ -64,13 +64,15 @@ usmap # view map
 
 # Add points
 usmap + geom_point(data = lcsub, aes(lon, lat), alpha = 0.5, color = "gold3") +
-  labs(x = "", y = "") + theme(axis.text = element_blank(), 
-  axis.ticks = element_blank()) # removing unnecessary labels
+  labs(x = "", y = "") + 
+  theme(axis.text = element_blank(), 
+    axis.ticks = element_blank()) # removing unnecessary labels
 
 # Or, color by year (much more interesting)
 usmap + geom_point(data = lcsub, aes(lon, lat, color = as.factor(year)), alpha = 0.5) +
-  labs(x = "", y = "", color = "Year") + theme(axis.text = element_blank(), 
-  axis.ticks = element_blank())
+  labs(x = "", y = "", color = "Year") + 
+  theme(axis.text = element_blank(), 
+    axis.ticks = element_blank())
 
 # Google United States map
 gusmap <- get_map(location = "united states", zoom = 4, maptype = "terrain",
@@ -79,5 +81,6 @@ ggmap(gusmap) # view map, adjust zoom as desired (zoom ranges from 3 to 21)
 
 # Plot GPS coordinates (be patient: a lot of data needs to be plotted)
 ggmap(gusmap) + geom_point(data = lcsub, aes(lon, lat, color = as.factor(year)), alpha = 0.5) +
-  labs(x = "", y = "", color = "Year") + theme(axis.text = element_blank(), 
-  axis.ticks = element_blank())
+  labs(x = "", y = "", color = "Year") + 
+  theme(axis.text = element_blank(), 
+    axis.ticks = element_blank())
