@@ -1,0 +1,59 @@
+% Begin Beamer Class
+\documentclass[12pt]{beamer}
+
+% Set Beamer Options
+\usetheme[progressbar = foot,
+  outer/numbering = none
+  ]{metropolis}
+\makeatletter
+\setlength{\metropolis@titleseparator@linewidth}{2pt}
+\setlength{\metropolis@progressonsectionpage@linewidth}{2pt}
+\setlength{\metropolis@progressinheadfoot@linewidth}{2pt}
+\makeatother
+
+% Define Colors
+\definecolor{black}{rgb}{0.0, 0.0, 0.0}
+\definecolor{white}{rgb}{1, 1, 1}
+\definecolor{goldenpoppy}{rgb}{0.99, 0.76, 0.0} % Close to Mizzou yellow but not exact
+
+% Set Colors
+\setbeamercolor{alerted text}{fg = goldenpoppy}
+\setbeamercolor{frametitle}{bg = black}
+\setbeamercolor{palette primary}{fg = white, bg = black}
+\setbeamercolor{background canvas}{fg = black}
+
+% Additional Package Options
+\usepackage{appendixnumberbeamer}
+\usepackage{booktabs}
+\usepackage[scale = 2]{ccicons}
+\usepackage{multirow}
+\usepackage{pgfplots}
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+\usepackage{xspace}
+\usepackage{tikz}
+\newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
+
+%------------------------------------------------------
+% Title Page
+\title[]{Main Title} 
+\subtitle{Subtitle}
+
+\author[Drolc]{Cody A. Drolc} % Name here
+
+\institute[]{University of Missouri} % University
+
+\date{\today} % Today's date
+
+%------------------------------------
+\begin{document} % Begin presentation
+
+\frame{\titlepage} % Make title page
+
+% First frame
+\begin{frame}{Sample}
+  \begin{center}
+    Sample Frame
+  \end{center}
+\end{frame}
+ 
+\end{document} % End presentation
