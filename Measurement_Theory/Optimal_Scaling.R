@@ -136,12 +136,15 @@ colnames(os.orig) <- c("relative_os", "relative", "partyid_os", "partyid",
 # Create plotting function so we do not have to repeat chunks of code
 plot.os <- function(obj) {
   df <- as.data.frame(cbind(obj$qual, obj$os)) # extract elements to data frame
-  ggplot(df, aes(x = V1, y = V2)) + geom_point() + geom_line() + 
-  coord_fixed() + theme_bw() + # force square
-  theme(panel.grid.minor = element_blank()) +
-  scale_y_continuous(sec.axis = dup_axis(name = element_blank())) +
-  scale_x_continuous(sec.axis = dup_axis(name = element_blank())) +
-  ylab("Optimally Scaled Values") + xlab("Original Values")
+  ggplot(df, aes(x = V1, y = V2)) + 
+    geom_point() + 
+    geom_line() + 
+    coord_fixed() + # force square
+    theme_bw() +
+    theme(panel.grid.minor = element_blank()) +
+    scale_y_continuous(sec.axis = dup_axis(name = element_blank())) +
+    scale_x_continuous(sec.axis = dup_axis(name = element_blank())) +
+    labs(y = "Optimally Scaled Values", x ="Original Values")
 }
 
 # Pass optiscale object to function  
