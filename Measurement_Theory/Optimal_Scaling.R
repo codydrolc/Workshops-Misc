@@ -153,26 +153,3 @@ plot.os(opscaled.partyid)
 plot.os(opscaled.ideo)
 plot.os(opscaled.econ)
 plot.os(opscaled.bill)
-
-#-------------------------------------------------------------------------------
-#---- Unrelated but potentially helpful: Parallel processing
-# Make your code run faster by creating clusters 
-
-# Install
-install.packages("doParallel", dependencies = T)
-
-# Load package
-library(doParallel)
-
-# Find the number of cores
-cores <- detectCores() - 1 # Subtract 1 so you don't overload your computer
-cl <- makeCluster(cores) # Create cluster with the number of cores minus 1
-registerDoParallel(cl) # Register parallel backend
-
-# Close cluster
-stopImplicitCluster()
-
-# A quick warning: Parallel processing is not supported by every function in R.
-# It can also overload your computer. Make sure you either drop the number of 
-# cores to an appropriate level or close other background processes. 
-# Proceed with caution! 
