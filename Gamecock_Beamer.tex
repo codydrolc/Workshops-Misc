@@ -1,0 +1,80 @@
+% Beamer presentation theme using the University of South Carolina's official colors
+% Use this for a clean, professional look when representing UofSC
+
+% Built around the Metropolis theme: https://github.com/matze/mtheme
+% The Metropolis theme should be included in the latest MiKTeX or
+% TeX Live distributions.
+
+% Begin Beamer Class
+\documentclass[12pt]{beamer}
+
+% Set Metropolis Options
+\usetheme[progressbar = foot,
+			outer/numbering = none
+			]{metropolis}
+\makeatletter
+\setlength{\metropolis@titleseparator@linewidth}{2pt}
+\setlength{\metropolis@progressonsectionpage@linewidth}{2pt}
+\setlength{\metropolis@progressinheadfoot@linewidth}{2pt}
+\makeatother
+
+% Define Colors
+\definecolor{black}{rgb}{0.0, 0.0, 0.0}
+\definecolor{white}{rgb}{1, 1, 1}
+\definecolor{gcgarnet}{RGB}{115, 0, 10} % Garnet https://www.sc.edu/about/offices_and_divisions/communications/toolbox/visuals/colors/index.php
+
+% Set Colors
+\setbeamercolor{alerted text}{fg = gcgarnet}
+\setbeamercolor{frametitle}{bg = black}
+\setbeamercolor{palette primary}{fg = white, bg = black}
+\setbeamercolor{background canvas}{fg = black}
+
+% Additional Package Options
+\usepackage{appendixnumberbeamer}
+\usepackage{booktabs}
+\usepackage[scale = 2]{ccicons}
+\usepackage{multirow}
+\usepackage{pgfplots}
+\setbeamertemplate{caption}{\raggedright\insertcaption\par}
+\usepackage{xspace}
+\usepackage{tikz}
+\newcommand{\themename}{\textbf{\textsc{metropolis}}\xspace}
+
+\usepackage{grffile}
+\usepackage{fontawesome}
+\usepackage{moresize}
+
+% Font
+\usepackage[outline]{contour}
+\usepackage[sfdefault, light, condensed]{roboto}
+\usepackage[T1]{fontenc}
+
+\usepackage{tabularx}
+
+%------------------------------------------------------
+% Title Page
+\title[]{Main Title} 
+\subtitle{Subtitle}
+
+\author[Drolc]{Cody A. Drolc} % Name here
+
+\institute[]{University of South Carolina} % University
+
+\date{\today} % Today's date
+
+%------------------------------------
+\begin{document} % Begin presentation
+	
+	\frame{\titlepage} % Make title page
+	
+	% First frame
+	\begin{frame}{Sample}
+		\begin{center}
+			Sample Frame
+		\end{center}
+	\end{frame}
+	
+\end{document} % End presentation
+
+
+%----------------------------------------
